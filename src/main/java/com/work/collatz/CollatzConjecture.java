@@ -18,6 +18,21 @@ public final class CollatzConjecture {
     private CollatzConjecture() {
     }
 
+     public static long collatzStep(long n) {
+        if (n <= 0) {
+            throw new IllegalArgumentException("Value  " + n + " is not valid");
+        }
+        if (n % 2 == 0) {
+            return n / 2;
+        } else {
+            // Verificar overflow antes de la operación
+            if (n > (Long.MAX_VALUE - 1) / 3) {
+                throw new ArithmeticException("Overflow detected in: " + n);
+            }
+            return 3 * n + 1;
+        }
+    }
+    
     public static List<BigInteger> generateCollatzSequence(BigInteger n) {
         if (n.intValue() <= 0) {
             throw new IllegalArgumentException("Value  " + n + " is not valid");
